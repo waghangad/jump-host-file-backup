@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: study
+spec:
+  serviceAccountName: study-chart-demo-chart
+  containers:
+  - name: study
+    image: waghangad/study:latest
+    command: ["sh", "-c", "while true; do sleep 3600; done"]
+

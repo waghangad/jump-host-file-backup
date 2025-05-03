@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-nlb
+  labels:
+    app: myapp
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-scheme: internet-facing
+    service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: ip
+    service.beta.kubernetes.io/aws-load-balancer-ssl-cert: "arn:aws:acm:ap-south-1:992293216837:certificate/47a4324c-f48b-4e2d-a94a-f5d761b72920"
+    service.beta.kubernetes.io/aws-load-balancer-ssl-ports: 443
+spec:
+  type: LoadBalancer
+  ports:
+  - name: tls
+    targetPort: 80
+    port: 443
+  - name: tcp
+    targetPort: 80
+    port: 80
+  selector:
+    tier: frontend
